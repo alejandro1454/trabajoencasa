@@ -1,0 +1,1455 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beat Time | Delivery de Comida Europea</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #E63946;
+            --primary-hover: #D62839;
+            --secondary: #F4A261;
+            --accent: #2A9D8F;
+            --dark: #0F1115;
+            --surface: #171A21;
+            --surface-card: #1E222D;
+            --border: rgba(255, 255, 255, 0.08);
+            --text-main: #F8F9FA;
+            --text-muted: #9EA3B0;
+            --radius-lg: 16px;
+            --radius-md: 12px;
+            --radius-sm: 8px;
+            --shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            padding-bottom: 60px;
+        }
+
+        /* --- Header & Navigation --- */
+        header {
+            background: rgba(15, 17, 21, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-container {
+            max-width: 1240px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.1rem 1.5rem;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 800;
+            font-size: 1.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-svg {
+            width: 42px;
+            height: 42px;
+            filter: drop-shadow(0 4px 12px rgba(230, 57, 70, 0.4));
+        }
+
+        .brand-text span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--text-main);
+        }
+
+        .cart-toggle-btn {
+            background: linear-gradient(135deg, var(--primary), #FF5A67);
+            color: white;
+            border: none;
+            padding: 0.65rem 1.35rem;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            box-shadow: 0 4px 15px rgba(230, 57, 70, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .cart-toggle-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(230, 57, 70, 0.45);
+        }
+
+        .cart-badge {
+            background: white;
+            color: var(--primary);
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 800;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            max-width: 1240px;
+            margin: 1.5rem auto 3rem;
+            padding: 4rem 2rem;
+            background: radial-gradient(circle at top right, rgba(230, 57, 70, 0.15), transparent 50%),
+                        linear-gradient(135deg, #171A21 0%, #111319 100%);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            background: rgba(230, 57, 70, 0.12);
+            color: var(--primary);
+            border: 1px solid rgba(230, 57, 70, 0.3);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 1.25rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1.25rem;
+            letter-spacing: -1px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, #FF6B6B, #F4A261);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            max-width: 650px;
+            margin: 0 auto 2rem;
+            font-size: 1.1rem;
+        }
+
+        .hero-features {
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .feature-item svg {
+            color: var(--secondary);
+        }
+
+        /* --- Filters & Catalog --- */
+        main {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .catalog-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .category-filters {
+            display: flex;
+            gap: 0.6rem;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+        }
+
+        .filter-btn {
+            background: var(--surface);
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+            padding: 0.5rem 1.2rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.75rem;
+        }
+
+        .product-card {
+            background: var(--surface-card);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .badge-origin {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: rgba(15, 17, 21, 0.85);
+            backdrop-filter: blur(8px);
+            color: #FFF;
+            padding: 0.25rem 0.65rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            z-index: 2;
+        }
+
+        .product-img-wrapper {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            background: var(--surface);
+        }
+
+        .product-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .product-card:hover .product-img {
+            transform: scale(1.06);
+        }
+
+        .product-info {
+            padding: 1.35rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .product-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+        }
+
+        .product-desc {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            margin-bottom: 1.25rem;
+            flex-grow: 1;
+            line-height: 1.5;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+            padding-top: 0.75rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .product-price {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
+        .add-btn {
+            background: rgba(230, 57, 70, 0.12);
+            color: var(--primary);
+            border: 1px solid rgba(230, 57, 70, 0.4);
+            padding: 0.6rem 1.1rem;
+            border-radius: var(--radius-sm);
+            font-weight: 700;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .add-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* --- Shopping Cart Sidebar & Modal --- */
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            z-index: 200;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .cart-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .cart-modal {
+            position: fixed;
+            top: 0;
+            right: -450px;
+            width: 100%;
+            max-width: 440px;
+            height: 100%;
+            background: var(--surface);
+            z-index: 201;
+            transition: right 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+            box-shadow: -8px 0 36px rgba(0, 0, 0, 0.6);
+            border-left: 1px solid var(--border);
+        }
+
+        .cart-modal.active {
+            right: 0;
+        }
+
+        .cart-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .cart-header h3 {
+            font-size: 1.25rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .close-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .close-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .cart-items {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 1.5rem;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            margin-bottom: 1.25rem;
+            padding-bottom: 1.25rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .cart-item-img {
+            width: 65px;
+            height: 65px;
+            border-radius: var(--radius-sm);
+            object-fit: cover;
+            border: 1px solid var(--border);
+        }
+
+        .cart-item-details {
+            flex-grow: 1;
+        }
+
+        .cart-item-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .cart-item-price {
+            color: var(--secondary);
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
+        .qty-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--surface-card);
+            border: 1px solid var(--border);
+            padding: 0.25rem 0.5rem;
+            border-radius: 6px;
+        }
+
+        .qty-btn {
+            background: transparent;
+            color: var(--text-main);
+            border: none;
+            width: 22px;
+            height: 22px;
+            font-weight: 800;
+            cursor: pointer;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.15s;
+        }
+
+        .qty-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .qty-val {
+            font-size: 0.9rem;
+            font-weight: 700;
+            min-width: 18px;
+            text-align: center;
+        }
+
+        .remove-item-btn {
+            background: transparent;
+            border: none;
+            color: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            margin-left: 0.5rem;
+            transition: color 0.2s;
+        }
+
+        .remove-item-btn:hover {
+            color: var(--primary);
+        }
+
+        .cart-summary {
+            padding: 1.5rem;
+            border-top: 1px solid var(--border);
+            background: #121419;
+        }
+
+        .summary-line {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .summary-line.total {
+            color: var(--text-main);
+            font-size: 1.25rem;
+            font-weight: 800;
+            margin-top: 0.75rem;
+            padding-top: 0.75rem;
+            border-top: 1px dashed rgba(255, 255, 255, 0.1);
+        }
+
+        .checkout-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary), #FF5A67);
+            color: white;
+            border: none;
+            padding: 0.9rem;
+            border-radius: var(--radius-md);
+            font-weight: 800;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 1.25rem;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 16px rgba(230, 57, 70, 0.35);
+        }
+
+        .checkout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 22px rgba(230, 57, 70, 0.5);
+        }
+
+        .empty-cart-view {
+            text-align: center;
+            padding: 4rem 1rem;
+            color: var(--text-muted);
+        }
+
+        .empty-cart-view svg {
+            width: 64px;
+            height: 64px;
+            margin-bottom: 1rem;
+            opacity: 0.3;
+        }
+
+        /* --- Order Modal --- */
+        .modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            width: 90%;
+            max-width: 500px;
+            background: var(--surface-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            z-index: 300;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+        }
+
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .modal h3 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 1.1rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 0.4rem;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: white;
+            padding: 0.75rem 1rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.95rem;
+            outline: none;
+        }
+
+        .form-group input:focus {
+            border-color: var(--primary);
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .btn-cancel {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+            padding: 0.75rem;
+            border-radius: var(--radius-sm);
+            font-weight: 700;
+            flex: 1;
+            cursor: pointer;
+        }
+
+        .btn-confirm {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem;
+            border-radius: var(--radius-sm);
+            font-weight: 700;
+            flex: 2;
+            cursor: pointer;
+        }
+
+        /* --- CHATBOT FLOATING WIDGET --- */
+        .chatbot-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), #FF5A67);
+            color: white;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(230, 57, 70, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 150;
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .chatbot-btn:hover {
+            transform: scale(1.08);
+        }
+
+        .chatbot-btn svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        .chat-window {
+            position: fixed;
+            bottom: 95px;
+            right: 25px;
+            width: 360px;
+            max-width: calc(100vw - 50px);
+            height: 500px;
+            max-height: 80vh;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+            z-index: 150;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px) scale(0.95);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .chat-window.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+
+        .chat-header {
+            background: var(--surface-card);
+            padding: 1rem 1.2rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chat-bot-info {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .chat-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(230, 57, 70, 0.2);
+            border: 1px solid var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+        }
+
+        .chat-title h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+        }
+
+        .chat-title p {
+            font-size: 0.75rem;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .chat-title p::before {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        .chat-messages {
+            flex-grow: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 0.7rem 1rem;
+            border-radius: 14px;
+            font-size: 0.875rem;
+            line-height: 1.4;
+        }
+
+        .message.bot {
+            background: var(--surface-card);
+            color: var(--text-main);
+            border-bottom-left-radius: 4px;
+            align-self: flex-start;
+            border: 1px solid var(--border);
+        }
+
+        .message.user {
+            background: var(--primary);
+            color: white;
+            border-bottom-right-radius: 4px;
+            align-self: flex-end;
+        }
+
+        .chat-quick-replies {
+            display: flex;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+            padding: 0 1rem 0.5rem;
+        }
+
+        .quick-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            padding: 0.35rem 0.7rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .quick-btn:hover {
+            background: rgba(230, 57, 70, 0.15);
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .chat-input-area {
+            padding: 0.8rem 1rem;
+            border-top: 1px solid var(--border);
+            background: var(--surface-card);
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .chat-input {
+            flex-grow: 1;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 0.5rem 1rem;
+            color: white;
+            font-size: 0.875rem;
+            outline: none;
+        }
+
+        .chat-input:focus {
+            border-color: var(--primary);
+        }
+
+        .chat-send-btn {
+            background: var(--primary);
+            border: none;
+            color: white;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .chat-send-btn:hover {
+            background: var(--primary-hover);
+        }
+
+        /* --- Footer --- */
+        footer {
+            max-width: 1240px;
+            margin: 4rem auto 0;
+            padding: 3rem 1.5rem 1.5rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 1.5rem;
+        }
+
+        footer p {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        /* Responsiveness */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.1rem; }
+            .nav-links { display: none; }
+            .cart-modal { max-width: 100%; }
+            .chat-window { right: 15px; bottom: 85px; }
+            .chatbot-btn { right: 15px; bottom: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navbar -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="brand">
+                <svg class="logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#E63946"/>
+                            <stop offset="100%" stop-color="#F4A261"/>
+                        </linearGradient>
+                    </defs>
+                    <circle cx="50" cy="50" r="42" stroke="url(#logoGrad)" stroke-width="8"/>
+                    <path d="M50 20V50L72 65" stroke="url(#logoGrad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M14 50H24" stroke="#F4A261" stroke-width="5" stroke-linecap="round"/>
+                    <path d="M19 32L27 37" stroke="#F4A261" stroke-width="5" stroke-linecap="round"/>
+                    <path d="M19 68L27 63" stroke="#F4A261" stroke-width="5" stroke-linecap="round"/>
+                </svg>
+                <div class="brand-text">BEAT <span>TIME</span></div>
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="#" class="active">Inicio</a></li>
+                <li><a href="#menu">Menú Europeo</a></li>
+            </ul>
+
+            <button class="cart-toggle-btn" onclick="toggleCart()">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                <span>Carrito</span>
+                <span class="cart-badge" id="cartBadge">0</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <span class="hero-tag">⚡ Delivery Gourmet a tu ritmo</span>
+        <h1>Alta Cocina Europea <br><span>En la puerta de tu casa</span></h1>
+        <p>Los mejores platillos tradicionales de España, Italia, Francia y Alemania preparados por chefs expertos y entregados en tiempo récord.</p>
+        
+        <div class="hero-features">
+            <div class="feature-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                <span>Entrega Express (30 min)</span>
+            </div>
+            <div class="feature-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+                <span>Ingredientes Auténticos</span>
+            </div>
+            <div class="feature-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                <span>Empaque Térmico Premium</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content & Catalog -->
+    <main id="menu">
+        <div class="catalog-header">
+            <h2 class="section-title">Especialidades Europeas</h2>
+            <div class="category-filters">
+                <button class="filter-btn active" onclick="filterCategory('todos', this)">Todos</button>
+                <button class="filter-btn" onclick="filterCategory('espana', this)">🇪🇸 España</button>
+                <button class="filter-btn" onclick="filterCategory('italia', this)">🇮🇹 Italia</button>
+                <button class="filter-btn" onclick="filterCategory('francia', this)">🇫🇷 Francia</button>
+                <button class="filter-btn" onclick="filterCategory('alemania', this)">🇩🇪 Alemania / Austria</button>
+            </div>
+        </div>
+
+        <div class="product-grid" id="productGrid">
+            <!-- Renderizado dinámico desde JS -->
+        </div>
+    </main>
+
+    <!-- Carrito Lateral -->
+    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-header">
+            <h3>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                Tu Pedido Beat Time
+            </h3>
+            <button class="close-btn" onclick="toggleCart()">&times;</button>
+        </div>
+
+        <div class="cart-items" id="cartItems">
+            <!-- Items del carrito JS -->
+        </div>
+
+        <div class="cart-summary" id="cartSummary">
+            <div class="summary-line">
+                <span>Subtotal</span>
+                <span id="subtotalVal">L 0.00</span>
+            </div>
+            <div class="summary-line">
+                <span>Envío Express</span>
+                <span id="shippingVal">L 60.00</span>
+            </div>
+            <div class="summary-line total">
+                <span>Total</span>
+                <span id="totalVal">L 0.00</span>
+            </div>
+            <button class="checkout-btn" onclick="openOrderModal()">Proceder al Pago 🚀</button>
+        </div>
+    </div>
+
+    <!-- Modal Formulario de Confirmación -->
+    <div class="cart-overlay" id="checkoutOverlay" onclick="closeOrderModal()"></div>
+    <div class="modal" id="checkoutModal">
+        <h3>Finalizar Pedido</h3>
+        <form id="orderForm" onsubmit="confirmOrder(event)">
+            <div class="form-group">
+                <label>Nombre Completo</label>
+                <input type="text" placeholder="Ej. Carlos Mendoza" required>
+            </div>
+            <div class="form-group">
+                <label>Dirección de Entrega</label>
+                <input type="text" placeholder="Colonia, calle, número de casa" required>
+            </div>
+            <div class="form-group">
+                <label>Método de Pago</label>
+                <select required>
+                    <option value="card">Tarjeta de Crédito / Débito</option>
+                    <option value="cash">Efectivo contra entrega</option>
+                    <option value="transfer">Transferencia bancaria / Tigo Money</option>
+                </select>
+            </div>
+            <div class="modal-actions">
+                <button type="button" class="btn-cancel" onclick="closeOrderModal()">Cancelar</button>
+                <button type="submit" class="btn-confirm">Confirmar y Enviar</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Widget del Chatbot -->
+    <button class="chatbot-btn" onclick="toggleChatbot()" title="Asistente Beat Time">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        </svg>
+    </button>
+
+    <div class="chat-window" id="chatWindow">
+        <div class="chat-header">
+            <div class="chat-bot-info">
+                <div class="chat-avatar">🤖</div>
+                <div class="chat-title">
+                    <h4>BeatBot</h4>
+                    <p>En línea</p>
+                </div>
+            </div>
+            <button class="close-btn" onclick="toggleChatbot()">&times;</button>
+        </div>
+
+        <div class="chat-messages" id="chatMessages">
+            <div class="message bot">
+                ¡Hola! 👋 Soy BeatBot, tu asistente de **Beat Time**. ¿En qué puedo ayudarte hoy?
+            </div>
+        </div>
+
+        <div class="chat-quick-replies">
+            <button class="quick-btn" onclick="sendQuickReply('Recomiéndame algo')">🍲 Recomendaciones</button>
+            <button class="quick-btn" onclick="sendQuickReply('Tiempos de envío')">⏱️ Tiempos de envío</button>
+            <button class="quick-btn" onclick="sendQuickReply('Métodos de pago')">💳 Métodos de pago</button>
+        </div>
+
+        <div class="chat-input-area">
+            <input type="text" class="chat-input" id="chatInput" placeholder="Escribe un mensaje..." onkeypress="handleChatKeyPress(event)">
+            <button class="chat-send-btn" onclick="sendChatMessage()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="brand">
+            <svg class="logo-svg" viewBox="0 0 100 100" fill="none" width="32" height="32">
+                <circle cx="50" cy="50" r="42" stroke="url(#logoGrad)" stroke-width="8"/>
+                <path d="M50 20V50L72 65" stroke="url(#logoGrad)" stroke-width="8" stroke-linecap="round"/>
+            </svg>
+            <div class="brand-text">BEAT <span>TIME</span></div>
+        </div>
+        <p>© 2026 Beat Time Delivery — Sabores Europeos Entregados a Ritmo Perfecto</p>
+    </footer>
+
+    <!-- Logic JS -->
+    <script>
+        // Catálogo Ampliado por Países (Precios en Lempiras)
+        const products = [
+            // 🇪🇸 ESPAÑA
+            {
+                id: 1,
+                name: "Paella Valenciana Tradicional",
+                category: "espana",
+                origin: "🇪🇸 España",
+                price: 410.00,
+                desc: "Arroz bomba de la Albufera con pollo de corral, judía verde, garrofón y el toque auténtico de azafrán puro.",
+                img: "https://images.unsplash.com/photo-1534080564583-6be75777b70a?w=600&auto=format&fit=crop&q=80"
+            },
+            {
+                id: 2,
+                name: "Tabla de Tapas Ibéricas",
+                category: "espana",
+                origin: "🇪🇸 España",
+                price: 450.00,
+                desc: "Selección de Jamón Ibérico de Bellota, Queso Manchego curado, tortilla española y pan con tomate fresco.",
+                img: "https://images.unsplash.com/photo-1541529086526-db283c563270?w=600&auto=format&fit=crop&q=80"
+            },
+            {
+                id: 3,
+                name: "Gazpacho Andaluz",
+                category: "espana",
+                origin: "🇪🇸 España",
+                price: 190.00,
+                desc: "Sopa fría de tomates maduros, pimiento, pepino y aceite de oliva virgen extra. Fresco y reconfortante.",
+                img: "https://images.unsplash.com/photo-1594998893017-36147cbcae05?w=600&auto=format&fit=crop&q=80"
+            },
+            {
+                id: 4,
+                name: "Croquetas de Jamón Ibérico",
+                category: "espana",
+                origin: "🇪🇸 España",
+                price: 225.00,
+                desc: "6 unidades de croquetas cremosas por dentro y ultra crujientes por fuera con jamón serrano de alta calidad.",
+                img: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&auto=format&fit=crop&q=80"
+            },
+
+            // 🇮🇹 ITALIA
+            {
+                id: 5,
+                name: "Rigatoni alla Carbonara",
+                category: "italia",
+                origin: "🇮🇹 Italia",
+                price: 350.00,
+                desc: "Receta romana original con Guanciale crujiente, yema de huevo fresco, queso Pecorino Romano y pimienta negra.",
+                img: "https://images.unsplash.com/photo-1612874742237-6526221588e3?w=600&auto=format&fit=crop&q=80"
+            },
+            {
+                id: 6,
+                name: "Pizza Margherita Gourmet",
+                category: "italia",
+                origin: "🇮🇹 Italia",
+                price: 310.00,
+                desc: "Masa madre de fermentación 48h, salsa de tomate San Marzano, Mozzarella de Búfala D.O.P y albahaca fresca.",
+                img: "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?w=600&auto=format&fit=crop&q=80"
+            },
+            {
+                id: 7,
+                name: "Lasagna Bolognese Tradizionale",
+                category: "italia",
+                origin: "🇮🇹 Italia",
+                price: 360.00,
+                desc: "Capas de pasta fresca, ragù de carne vacuna y cerdo a fuego lento, bechamel suave y Parmigiano Reggiano.",
+                img: "https://images.unsplash.com/photo-1574894709920-11b28e7367e3?w=600&auto=format&fit=crop&q=80"
+            },
+            {
+                id: 8,
+                name: "Tiramisú Clásico de Treviso",
+                category: "italia",
+                origin: "🇮🇹 Italia",
+                price: 160.00,
+                desc: "Bizcochos Soletilla impregnados en café espresso, crema ligera de Mascarpone y cacao en polvo puro.",
+                img: "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=600&auto=format&fit=crop&q=80"
+            },
+
+            // 🇫🇷 FRANCIA
+            {
+                id: 9,
+                name: "Boeuf Bourguignon",
+                category: "francia",
+                origin: "🇫🇷 Francia",
+                price: 440.00,
+                desc: "Estofado clásico de ternera macerada y cocinada en vino tinto de Borgoña con champiñones y cebollitas.",
+                img: "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?w=600&auto=format&fit=crop&q=80"
+            },
+            {
+                id: 10,
+                name: "Crepes Suzette Flambeadas",
+                category: "francia",
+                origin: "🇫🇷 Francia",
+                price: 210.00,
+                desc: "Finas crepes en salsa caramelizada de mantequilla, zumo de naranja y flambeado de licor Grand Marnier.",
+                img: "https://images.unsplash.com/photo-1519676867240-f03562e64548?w=600&auto=format&fit=crop&q=80"
+            },
+            {
+                id: 11,
+                name: "Ratatouille Provenzal",
+                category: "francia",
+                origin: "🇫🇷 Francia",
+                price: 275.00,
+                desc: "Guiso tradicional de berenjena, calabacín, pimiento y tomate horneados con hierbas de la Provenza.",
+                img: "https://images.unsplash.com/photo-1572453800999-e8d2d1589b7c?w=600&auto=format&fit=crop&q=80"
+            },
+            {
+                id: 12,
+                name: "Quiche Lorraine",
+                category: "francia",
+                origin: "🇫🇷 Francia",
+                price: 250.00,
+                desc: "Tarta salada de masa quebrada rellena de bacon ahumado, crema de leche fresca y queso Gruyère rallado.",
+                img: "https://images.unsplash.com/photo-1621236378699-8597faf6a176?w=600&auto=format&fit=crop&q=80"
+            },
+
+            // 🇩🇪 ALEMANIA / AUSTRIA
+            {
+                id: 13,
+                name: "Wiener Schnitzel de Ternera",
+                category: "alemania",
+                origin: "🇦🇹 Austria / 🇩🇪",
+                price: 375.00,
+                desc: "Escalope de ternera empanado al estilo vienés, dorado y crujiente, acompañado de ensalada tibia de patata.",
+                img: "https://images.unsplash.com/photo-1599921841143-819065a55cc6?w=600&auto=format&fit=crop&q=80"
+            },
+            {
+                id: 14,
+                name: "Bratwurst Combo Alemán",
+                category: "alemania",
+                origin: "🇩🇪 Alemania",
+                price: 290.00,
+                desc: "Salchichas artesanales a la parrilla servidas con Sauerkraut (chucrut), mostaza dulce y Brezel caliente.",
+                img: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=600&auto=format&fit=crop&q=80"
+            },
+            {
+                id: 15,
+                name: "Kartoffelsalat (Ensalada de Patata)",
+                category: "alemania",
+                origin: "🇩🇪 Alemania",
+                price: 150.00,
+                desc: "Ensalada bávara tradicional de patatas con pepinillos, cebolla morada y aderezo suave de mostaza en grano.",
+                img: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&auto=format&fit=crop&q=80"
+            },
+            {
+                id: 16,
+                name: "Apfelstrudel de Manzana",
+                category: "alemania",
+                origin: "🇦🇹 Austria / 🇩🇪",
+                price: 175.00,
+                desc: "Hojaldre crujiente relleno de manzana especiada con canela, pasas y nueces, servido con crema de vainilla.",
+                img: "https://images.unsplash.com/photo-1568571780765-9276ac8b75a2?w=600&auto=format&fit=crop&q=80"
+            }
+        ];
+
+        let cart = [];
+        let currentFilter = 'todos';
+
+        // Renderizar Catálogo
+        function renderProducts() {
+            const grid = document.getElementById('productGrid');
+            const filtered = currentFilter === 'todos' 
+                ? products 
+                : products.filter(p => p.category === currentFilter);
+
+            grid.innerHTML = filtered.map(prod => `
+                <div class="product-card">
+                    <span class="badge-origin">${prod.origin}</span>
+                    <div class="product-img-wrapper">
+                        <img src="${prod.img}" alt="${prod.name}" class="product-img" loading="lazy">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">${prod.name}</h3>
+                        <p class="product-desc">${prod.desc}</p>
+                        <div class="product-footer">
+                            <span class="product-price">L ${prod.price.toFixed(2)}</span>
+                            <button class="add-btn" onclick="addToCart(${prod.id})">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                                Agregar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Filtrar Categorías
+        function filterCategory(cat, btn) {
+            currentFilter = cat;
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderProducts();
+        }
+
+        // Operaciones del Carrito
+        function addToCart(id) {
+            const item = cart.find(i => i.id === id);
+            if (item) {
+                item.qty++;
+            } else {
+                const prod = products.find(p => p.id === id);
+                cart.push({ ...prod, qty: 1 });
+            }
+            updateCartUI();
+        }
+
+        function changeQty(id, delta) {
+            const item = cart.find(i => i.id === id);
+            if (!item) return;
+
+            item.qty += delta;
+            if (item.qty <= 0) {
+                cart = cart.filter(i => i.id !== id);
+            }
+            updateCartUI();
+        }
+
+        function removeItem(id) {
+            cart = cart.filter(i => i.id !== id);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const cartItemsContainer = document.getElementById('cartItems');
+            const cartBadge = document.getElementById('cartBadge');
+            const subtotalVal = document.getElementById('subtotalVal');
+            const totalVal = document.getElementById('totalVal');
+
+            const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+            cartBadge.textContent = totalQty;
+
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = `
+                    <div class="empty-cart-view">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                        <p>Tu carrito está vacío</p>
+                        <small style="color: rgba(255,255,255,0.4);">¡Explora el menú y añade platillos deliciosos!</small>
+                    </div>
+                `;
+            } else {
+                cartItemsContainer.innerHTML = cart.map(item => `
+                    <div class="cart-item">
+                        <img src="${item.img}" alt="${item.name}" class="cart-item-img">
+                        <div class="cart-item-details">
+                            <div class="cart-item-title">${item.name}</div>
+                            <div class="cart-item-price">L ${(item.price * item.qty).toFixed(2)}</div>
+                        </div>
+                        <div class="qty-controls">
+                            <button class="qty-btn" onclick="changeQty(${item.id}, -1)">-</button>
+                            <span class="qty-val">${item.qty}</span>
+                            <button class="qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
+                        </div>
+                        <button class="remove-item-btn" onclick="removeItem(${item.id})" title="Eliminar">&times;</button>
+                    </div>
+                `).join('');
+            }
+
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            const shipping = cart.length > 0 ? 60.00 : 0;
+            const total = subtotal + shipping;
+
+            subtotalVal.textContent = `L ${subtotal.toFixed(2)}`;
+            document.getElementById('shippingVal').textContent = cart.length > 0 ? `L ${shipping.toFixed(2)}` : 'L 0.00';
+            totalVal.textContent = `L ${total.toFixed(2)}`;
+        }
+
+        // Toggles & Modals
+        function toggleCart() {
+            document.getElementById('cartModal').classList.toggle('active');
+            document.getElementById('cartOverlay').classList.toggle('active');
+        }
+
+        function openOrderModal() {
+            if (cart.length === 0) {
+                alert("Agrega platillos a tu carrito antes de proceder.");
+                return;
+            }
+            document.getElementById('checkoutModal').classList.add('active');
+            document.getElementById('checkoutOverlay').classList.add('active');
+        }
+
+        function closeOrderModal() {
+            document.getElementById('checkoutModal').classList.remove('active');
+            document.getElementById('checkoutOverlay').classList.remove('active');
+        }
+
+        function confirmOrder(e) {
+            e.preventDefault();
+            alert("🎉 ¡Pedido registrado con éxito en Beat Time!\nTus sabores europeos llegarán en aproximadamente 30 minutos.");
+            cart = [];
+            updateCartUI();
+            closeOrderModal();
+            toggleCart();
+        }
+
+        /* --- LÓGICA DEL CHATBOT --- */
+        function toggleChatbot() {
+            document.getElementById('chatWindow').classList.toggle('active');
+        }
+
+        function sendQuickReply(text) {
+            document.getElementById('chatInput').value = text;
+            sendChatMessage();
+        }
+
+        function handleChatKeyPress(e) {
+            if (e.key === 'Enter') {
+                sendChatMessage();
+            }
+        }
+
+        function sendChatMessage() {
+            const input = document.getElementById('chatInput');
+            const text = input.value.trim();
+            if (!text) return;
+
+            const messagesContainer = document.getElementById('chatMessages');
+
+            // Mensaje usuario
+            const userMsg = document.createElement('div');
+            userMsg.className = 'message user';
+            userMsg.textContent = text;
+            messagesContainer.appendChild(userMsg);
+
+            input.value = '';
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+            // Respuesta automatizada Bot
+            setTimeout(() => {
+                const botMsg = document.createElement('div');
+                botMsg.className = 'message bot';
+                botMsg.innerHTML = getBotReply(text.toLowerCase());
+                messagesContainer.appendChild(botMsg);
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            }, 600);
+        }
+
+        function getBotReply(query) {
+            if (query.includes('recomi&eacute;ndame') || query.includes('recomiendame') || query.includes('recomendaciones') || query.includes('comida') || query.includes('plato')) {
+                return "Te recomiendo probar nuestra **Paella Valenciana Tradicional** (L 410.00) o los exquisitos **Rigatoni alla Carbonara** (L 350.00). ¡Son de los más pedidos! 🍝🇪🇸";
+            } else if (query.includes('tiempo') || query.includes('envio') || query.includes('envío') || query.includes('tarda')) {
+                return "Nuestro tiempo promedio de entrega es de **30 a 45 minutos** gracias a nuestro empaque térmico express. ⏱️🚀";
+            } else if (query.includes('pago') || query.includes('tarjeta') || query.includes('efectivo') || query.includes('metodo')) {
+                return "Aceptamos **Tarjetas de crédito/débito**, **Efectivo contra entrega** y **Transferencias bancarias / Tigo Money**. 💳💵";
+            } else if (query.includes('hola') || query.includes('buenas')) {
+                return "¡Hola! ¿En qué puedo ayudarte a elegir hoy para tu comida europea? 😊";
+            } else {
+                return "Entendido. Si tienes dudas sobre platillos, métodos de pago o tiempos de entrega, ¡solo pregúntame! O explora nuestro menú directamente arriba. 🍽️";
+            }
+        }
+
+        // Inicializar
+        renderProducts();
+    </script>
+</body>
+</html>
